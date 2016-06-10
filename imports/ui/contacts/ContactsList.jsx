@@ -13,9 +13,11 @@ class ContactsList extends Component {
   render() {
     return (
         <div className="ui text container contacts">
-          <div className="ui segments">
+          <table className="ui selectable green table">
+            <tbody>
             {this.renderContacts()}
-          </div>
+            </tbody>
+          </table>
         </div>
     );
   }
