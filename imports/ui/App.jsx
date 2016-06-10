@@ -4,15 +4,24 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { Contacts } from '../api/contacts.js';
 
 import ContactsList from './contacts/ContactsList.jsx';
+import AddContactModal from './common/AddContactModal.jsx';
 
 class App extends Component {
+
+  _handleAddClick() {
+    this.refs.modal.show();
+  }
+
   render() {
     return (
         <div className="app">
           <h3 className="ui center aligned header">Contacts
-            <div className="ui green label">Add</div>
+            <button className="ui green label" onClick={this._handleAddClick.bind(this)}>Add Contact
+            </button>
           </h3>
           <ContactsList contacts={this.props.contacts}/>
+
+          <AddContactModal ref="modal"/>
         </div>
     );
   }
