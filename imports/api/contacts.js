@@ -20,12 +20,9 @@ if (Meteor.isServer) {
  * Contacts Actions
  */
 Meteor.methods({
-  /**
-   * Insert a contact
-   *
-   * @param {object} data
-   */
-      'contacts.insert'(data) {
+  // Insert a contact
+  // @param {object} data
+  'contacts.insert'(data) {
     let {firstName, lastName, phone} = data;
 
     check(firstName, String);
@@ -39,5 +36,15 @@ Meteor.methods({
       createdAt: new Date(),
       updatedAt: new Date(),
     });
+  },
+  // Remove a contact
+  // @param {string} contactId
+  'contacts.remove'(contactId) {
+    const contact = Contacts.findOne(contactId);
+    if (contact) {
+      Contacts.remove(contact._id);
+    } else {
+      throw new Meteor.Error('Contact not found.');
+    }
   },
 });
