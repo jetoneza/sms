@@ -6,6 +6,11 @@ import { Contacts } from '../api/contacts.js';
 import ContactsList from './contacts/ContactsList.jsx';
 import AddContactModal from './common/AddContactModal.jsx';
 
+/**
+ * Main app component
+ *
+ * @author jet.oneza
+ */
 class App extends Component {
 
   _handleAddClick() {

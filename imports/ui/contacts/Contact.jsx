@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 
+/**
+ * Contact view component
+ *
+ * @author jet.oneza
+ */
 class Contact extends Component {
   render() {
     const {contact} = this.props;
