@@ -7,6 +7,16 @@ import React, { Component } from 'react';
  */
 class ContactForm extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      firstName: '',
+      lastName: '',
+      phone: ''
+    };
+  }
+
   _handleSubmit() {
     const {firstName, lastName, phone} = this.refs;
 
@@ -16,6 +26,7 @@ class ContactForm extends Component {
     }
 
     let data = {
+      _id: this.props.data ? this.props.data._id : null,
       firstName: firstName.value.trim(),
       lastName: lastName.value.trim(),
       phone: phone.value.trim()
@@ -29,8 +40,8 @@ class ContactForm extends Component {
     firstName.value = lastName.value = phone.value = '';
   }
 
-  _getData() {
-    var {data} = this.props;
+  componentWillReceiveProps(newProps) {
+    var {data} = newProps;
 
     var formData = {
       fistName: '',
@@ -39,18 +50,22 @@ class ContactForm extends Component {
     };
 
     if (data) {
-      formData.fistName = data.firstName;
+      formData.firstName = data.firstName;
       formData.lastName = data.lastName;
       formData.phone = data.phone;
     }
 
-    return formData;
+    this.setState(formData);
+  }
+
+  _handleTextChange(e) {
+    let {name, value} = e.target;
+    this.setState({[name]: value});
   }
 
   render() {
     let {submitLabel} = this.props;
-
-    var data = this._getData();
+    let {firstName, lastName, phone} = this.state;
 
     return (
         <form className="ui form">
@@ -59,17 +74,20 @@ class ContactForm extends Component {
 
             <div className="two fields">
               <div className="field">
-                <input ref="firstName" type="text" name="firstName" defaultValue={data.firstName}
+                <input ref="firstName" type="text" name="firstName" value={firstName}
+                       onChange={this._handleTextChange.bind(this)}
                        placeholder="First Name"/>
               </div>
               <div className="field">
-                <input ref="lastName" type="text" name="lastName" defaultValue={data.lastName}
+                <input ref="lastName" type="text" name="lastName" value={lastName}
+                       onChange={this._handleTextChange.bind(this)}
                        placeholder="Last Name"/>
               </div>
             </div>
             <div className="field">
               <label>Cellphone Number</label>
-              <input ref="phone" type="tel" name="number" defaultValue={data.phone} maxlength="15"
+              <input ref="phone" type="tel" name="phone" value={phone} maxlength="15"
+                     onChange={this._handleTextChange.bind(this)}
                      placeholder="Cellphone #"/>
             </div>
           </div>

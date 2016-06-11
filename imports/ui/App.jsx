@@ -5,6 +5,7 @@ import { Contacts } from '../api/contacts.js';
 
 import ContactsList from './contacts/ContactsList.jsx';
 import AddContactModal from './common/AddContactModal.jsx';
+import EditContactModal from './common/EditContactModal.jsx';
 
 /**
  * Main app component
@@ -13,8 +14,22 @@ import AddContactModal from './common/AddContactModal.jsx';
  */
 class App extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      activeContact: null
+    };
+  }
+
   _handleAddClick() {
     this.refs.addModal.show();
+  }
+
+  handleEditClick(activeContact) {
+    this.setState({activeContact});
+
+    this.refs.editModal.show();
   }
 
   render() {
@@ -24,9 +39,11 @@ class App extends Component {
             <button className="ui green label" onClick={this._handleAddClick.bind(this)}>Add Contact
             </button>
           </h3>
-          <ContactsList contacts={this.props.contacts}/>
+          <ContactsList contacts={this.props.contacts}
+                        handleEditClick={this.handleEditClick.bind(this)}/>
 
           <AddContactModal ref="addModal"/>
+          <EditContactModal ref="editModal" data={this.state.activeContact}/>
         </div>
     );
   }

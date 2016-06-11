@@ -11,7 +11,8 @@ class ContactsList extends Component {
 
   renderContacts() {
     return this.props.contacts.map((contact) => {
-      return <Contact key={contact._id} contact={contact}/>;
+      return <Contact key={contact._id} contact={contact}
+                      handleEditClick={this.props.handleEditClick}/>;
     });
   }
 

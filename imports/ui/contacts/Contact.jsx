@@ -28,7 +28,8 @@ class Contact extends Component {
             {phone}
           </td>
           <td className="right aligned">
-            <button className="ui green icon button">
+            <button className="ui green icon button"
+                    onClick={() => {this.props.handleEditClick(contact)}}>
               <i className="write icon"></i>
             </button>
             <button className="ui red icon button" onClick={this._remove.bind(this)}>

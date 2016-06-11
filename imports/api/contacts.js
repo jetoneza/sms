@@ -40,11 +40,28 @@ Meteor.methods({
   // Remove a contact
   // @param {string} contactId
   'contacts.remove'(contactId) {
-    const contact = Contacts.findOne(contactId);
+    var contact = Contacts.findOne(contactId);
     if (contact) {
       Contacts.remove(contact._id);
     } else {
       throw new Meteor.Error('Contact not found.');
     }
   },
+  // Update a contact
+  // @param {object} contact
+  'contacts.update'(contact) {
+    var storedContact = Contacts.findOne(contact._id);
+    if (storedContact) {
+      Contacts.update(contact._id, {
+        $set: {
+          firstName: contact.firstName,
+          lastName: contact.lastName,
+          phone: contact.phone,
+          updatedAt: new Date()
+        }
+      });
+    } else {
+      throw new Meteor.Error('Contact not found.');
+    }
+  }
 });
