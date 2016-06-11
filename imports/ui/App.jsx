@@ -14,7 +14,7 @@ import AddContactModal from './common/AddContactModal.jsx';
 class App extends Component {
 
   _handleAddClick() {
-    this.refs.modal.show();
+    this.refs.addModal.show();
   }
 
   render() {
@@ -26,7 +26,7 @@ class App extends Component {
           </h3>
           <ContactsList contacts={this.props.contacts}/>
 
-          <AddContactModal ref="modal"/>
+          <AddContactModal ref="addModal"/>
         </div>
     );
   }

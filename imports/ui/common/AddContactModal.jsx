@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import ContactForm from './ContactForm.jsx';
+
 /**
  * Add contact modal component
  *
@@ -19,29 +21,9 @@ class AddContactModal extends Component {
     $(this.refs.modal).modal('hide');
   }
 
-  _handleAddContact() {
-    const {firstName, lastName, phone} = this.refs;
-
-    if (firstName.value.trim() == '') {
-      window.alert('Please enter a name.');
-      return;
-    }
-
-    let data = {
-      firstName: firstName.value.trim(),
-      lastName: lastName.value.trim(),
-      phone: phone.value.trim()
-    }
-
+  handleSubmit(data) {
     Meteor.call('contacts.insert', data);
-
     this.close();
-    this._clearData();
-  }
-
-  _clearData() {
-    var {firstName, lastName, phone} = this.refs;
-    firstName.value = lastName.value = phone.value = '';
   }
 
   render() {
@@ -53,29 +35,7 @@ class AddContactModal extends Component {
             Add Contact
           </div>
           <div className="content">
-            <form className="ui form">
-              <div className="field">
-                <label>Name</label>
-
-                <div className="two fields">
-                  <div className="field">
-                    <input ref="firstName" type="text" name="firstName" placeholder="First Name"/>
-                  </div>
-                  <div className="field">
-                    <input ref="lastName" type="text" name="lastName" placeholder="Last Name"/>
-                  </div>
-                </div>
-                <div className="field">
-                  <label>Cellphone Number</label>
-                  <input ref="phone" type="tel" name="number" maxlength="15"
-                         placeholder="Cellphone #"/>
-                </div>
-              </div>
-            </form>
-          </div>
-          <div className="actions">
-            <div className="ui red button" onClick={this.close.bind(this)}>Cancel</div>
-            <div className="ui green button" onClick={this._handleAddContact.bind(this)}>Add</div>
+            <ContactForm submitLabel="Add" handleSubmit={this.handleSubmit.bind(this)}/>
           </div>
         </div>
     );

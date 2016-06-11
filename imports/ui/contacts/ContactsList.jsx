@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Contact from './Contact.jsx'
+import Contact from './Contact.jsx';
 
 /**
  * Contacts list component
