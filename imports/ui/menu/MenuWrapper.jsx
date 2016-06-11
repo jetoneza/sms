@@ -14,7 +14,7 @@ class MenuWrapper extends Component {
 
           <div className="ui two column stackable grid text container">
             <div className="column">
-              <a className="fluid large ui basic red button">
+              <a href="/create-message" className="fluid large ui basic red button">
                 <i className="icon edit"></i>
                 Create Message
               </a>
