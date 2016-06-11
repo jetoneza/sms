@@ -18,13 +18,11 @@ class ContactsList extends Component {
 
   render() {
     return (
-        <div className="ui text container contacts">
-          <table className="ui selectable green table">
-            <tbody>
-            {this.renderContacts()}
-            </tbody>
-          </table>
-        </div>
+        <table className="ui selectable green table">
+          <tbody>
+          {this.renderContacts()}
+          </tbody>
+        </table>
     );
   }
 }

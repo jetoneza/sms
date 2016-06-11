@@ -33,15 +33,29 @@ class App extends Component {
   }
 
   render() {
+    var contactsList = <ContactsList contacts={this.props.contacts}
+                                     handleEditClick={this.handleEditClick.bind(this)}/>;
+
+    if (this.props.contacts.length == 0) {
+      contactsList = (
+          <div className="ui success message">
+            <div className="header">
+              Your contacts list is empty.
+            </div>
+            <p>Add your very first contact now!</p>
+          </div>
+      );
+    }
+
     return (
         <div className="app">
           <h3 className="ui center aligned header">Contacts
             <button className="ui green label" onClick={this._handleAddClick.bind(this)}>Add Contact
             </button>
           </h3>
-          <ContactsList contacts={this.props.contacts}
-                        handleEditClick={this.handleEditClick.bind(this)}/>
-
+          <div className="ui text container contacts">
+            {contactsList}
+          </div>
           <AddContactModal ref="addModal"/>
           <EditContactModal ref="editModal" data={this.state.activeContact}/>
         </div>
