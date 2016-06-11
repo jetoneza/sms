@@ -10,11 +10,13 @@ class ContactForm extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
+    this.defaultState = {
       firstName: '',
       lastName: '',
       phone: ''
     };
+
+    this.state = this.defaultState;
   }
 
   _handleSubmit() {
@@ -38,6 +40,7 @@ class ContactForm extends Component {
   _clearData() {
     var {firstName, lastName, phone} = this.refs;
     firstName.value = lastName.value = phone.value = '';
+    this.setState(this.defaultState);
   }
 
   componentWillReceiveProps(newProps) {
